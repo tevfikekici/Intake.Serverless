@@ -1,0 +1,15 @@
+C:\Users\Tevfik Ekici\source\repos\Intake.Serverless\obj\Debug\net8.0\Intake.Serverless.csproj.AssemblyReference.cache
+C:\Users\Tevfik Ekici\source\repos\Intake.Serverless\obj\Debug\net8.0\Intake.Serverless.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Tevfik Ekici\source\repos\Intake.Serverless\obj\Debug\net8.0\Intake.Serverless.AssemblyInfoInputs.cache
+C:\Users\Tevfik Ekici\source\repos\Intake.Serverless\obj\Debug\net8.0\Intake.Serverless.AssemblyInfo.cs
+C:\Users\Tevfik Ekici\source\repos\Intake.Serverless\obj\Debug\net8.0\Intake.Serverless.csproj.CoreCompileInputs.cache
+C:\Users\Tevfik Ekici\source\repos\Intake.Serverless\bin\Debug\net8.0\Intake.Serverless.deps.json
+C:\Users\Tevfik Ekici\source\repos\Intake.Serverless\bin\Debug\net8.0\Intake.Serverless.dll
+C:\Users\Tevfik Ekici\source\repos\Intake.Serverless\bin\Debug\net8.0\Intake.Serverless.pdb
+C:\Users\Tevfik Ekici\source\repos\Intake.Serverless\bin\Debug\net8.0\Intake.Common.dll
+C:\Users\Tevfik Ekici\source\repos\Intake.Serverless\bin\Debug\net8.0\Intake.Common.pdb
+C:\Users\Tevfik Ekici\source\repos\Intake.Serverless\obj\Debug\net8.0\Intake.S.0869BCFD.Up2Date
+C:\Users\Tevfik Ekici\source\repos\Intake.Serverless\obj\Debug\net8.0\Intake.Serverless.dll
+C:\Users\Tevfik Ekici\source\repos\Intake.Serverless\obj\Debug\net8.0\refint\Intake.Serverless.dll
+C:\Users\Tevfik Ekici\source\repos\Intake.Serverless\obj\Debug\net8.0\Intake.Serverless.pdb
+C:\Users\Tevfik Ekici\source\repos\Intake.Serverless\obj\Debug\net8.0\ref\Intake.Serverless.dll

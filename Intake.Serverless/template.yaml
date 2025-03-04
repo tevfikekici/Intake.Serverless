@@ -1,0 +1,88 @@
+AWSTemplateFormatVersion: '2010-09-09'
+
+Parameters:
+  EnvType:
+    AllowedValues: [dev, test, accept, uat, prod, prod-pub]
+    ConstraintDescription: must be dev, test, acceptance, UAT, or prod.
+    Default: dev
+    Description: Dev, Test, Accept, UAT, or Prod
+    Type: String
+  IssuerUrl:
+    Type: String
+    Description: URL of JWT issuer
+    MinLength: '8'
+    Default: https://ssodev.tfsonline.com/oauth2/auspndj123fg4ds56g1d
+  AudienceUrl:
+    Type: String
+    Description: URL of JWT token audience
+    MinLength: '8'
+    Default: https://dev.tfsonline.com
+
+Resources:
+  S3Bucket:
+    Type: AWS::S3::Bucket
+    Properties:
+      BucketName: !Sub "s3-trigger-lambda-${AWS::AccountId}"
+
+  LambdaExecutionRole:
+    Type: AWS::IAM::Role
+    Properties:
+      AssumeRolePolicyDocument:
+        Version: "2012-10-17"
+        Statement:
+          - Effect: Allow
+            Principal:
+              Service: [lambda.amazonaws.com]
+            Action: sts:AssumeRole
+      Policies:
+        - PolicyName: LambdaS3ExecutionPolicy
+          PolicyDocument:
+            Version: "2012-10-17"
+            Statement:
+              - Effect: Allow
+                Action:
+                  - s3:GetObject
+                Resource: !Sub "arn:aws:s3:::${S3Bucket}/*"
+              - Effect: Allow
+                Action:
+                  - logs:CreateLogGroup
+                  - logs:CreateLogStream
+                  - logs:PutLogEvents
+                Resource: "arn:aws:logs:*:*:*"
+
+  LambdaFunction:
+    Type: AWS::Lambda::Function
+    Properties:
+      FunctionName: S3TriggeredLambda
+      Runtime: dotnet8
+      Role: !GetAtt LambdaExecutionRole.Arn
+      Handler: Intake::Serverless.Function::FunctionHandler
+      Code:
+        S3Bucket: "your-code-bucket"
+        S3Key: "your-code.zip"
+      Events:
+        S3Event:
+          Type: S3
+          Properties:
+            Bucket: !Ref S3Bucket
+            Events: s3:ObjectCreated:*
+
+  AuthorizerConfigLambda:
+    Type: 'AWS::Serverless::Function'
+    Properties:
+      FunctionName: !Sub ${AWS::StackName}-authorizer-config-function
+      PermissionsBoundary: 
+          Fn::Sub: arn:${AWS::Partition}:iam::${AWS::AccountId}:policy/VA-PB-Standard
+      Handler: 'Intake.LambdaAuthorizer::Intake.LambdaAuthorizer.AuthorizerConFunction::FunctionHandler'
+      Runtime: dotnet6
+      CodeUri: '../../Intake.LambdaAuthorizer'
+      Policies:
+        - AWSLambdaBasicExecutionRole   
+      MemorySize: 256
+      Timeout: 30
+      Tracing: Active
+      Environment:
+        Variables:
+          issuerUrl: !Ref IssuerUrl
+          audienceUrl: !Ref AudienceUrl
+          AWS_LogGroup: !Ref ConfigurationLogGroup

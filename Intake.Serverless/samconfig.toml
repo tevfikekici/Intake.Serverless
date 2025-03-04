@@ -1,0 +1,12 @@
+version = 0.1
+[default]
+[default.deploy]
+[default.deploy.parameters]
+stack_name = "Intake-dev-te"
+s3_bucket = "aws-sam-cli-managed-default-samclisourcebucket-1p39ykn0i139v"
+s3_prefix = "Intake-dev-te"
+region = "eu-central-1"
+profile = "ss-tfsnonprod"
+capabilities = "CAPABILITY_IAM"
+parameter_overrides = "EnvType=\"dev\" IssuerUrl=\"https://ssodev.TFSonline.com/oauth2/gdfsgdfgdfgds\" AudienceUrl=\"https://dev.tfsonline.com\""
+image_repositories = []
